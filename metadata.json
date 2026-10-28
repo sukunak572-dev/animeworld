@@ -1,0 +1,6 @@
+{
+  "name": "ANIMEVERSE",
+  "description": "Premium cinematic anime streaming platform with editorial layout, multi-language audio/subtitles, custom video player, and admin dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,108 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with preferences",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "email"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Authorized administrator document",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "role": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email", "role"]
+    },
+    "Anime": {
+      "title": "Anime",
+      "description": "Anime title and metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "romajiTitle": { "type": "string" },
+        "synopsis": { "type": "string" },
+        "releaseYear": { "type": "number" },
+        "rating": { "type": "number" },
+        "status": { "type": "string" },
+        "isFeatured": { "type": "boolean" },
+        "studio": { "type": "string" }
+      },
+      "required": ["id", "title", "synopsis"]
+    },
+    "Watchlist": {
+      "title": "Watchlist",
+      "description": "User saved anime item",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "animeId": { "type": "string" },
+        "addedAt": { "type": "string" }
+      },
+      "required": ["userId", "animeId"]
+    },
+    "History": {
+      "title": "History",
+      "description": "Episode watch progress and history",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "animeId": { "type": "string" },
+        "episodeId": { "type": "string" },
+        "progressSeconds": { "type": "number" },
+        "lastWatchedAt": { "type": "string" }
+      },
+      "required": ["userId", "animeId", "episodeId"]
+    },
+    "AdminLog": {
+      "title": "AdminLog",
+      "description": "Audit record of admin activity",
+      "type": "object",
+      "properties": {
+        "adminEmail": { "type": "string" },
+        "action": { "type": "string" },
+        "target": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["adminEmail", "action", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Private profile document for each user"
+    },
+    "/admins/{adminId}": {
+      "schema": "Admin",
+      "description": "Allowlist of authorized administrators"
+    },
+    "/anime/{animeId}": {
+      "schema": "Anime",
+      "description": "Anime catalog accessible for reading to all, editable by admins"
+    },
+    "/watchlists/{watchlistId}": {
+      "schema": "Watchlist",
+      "description": "User watchlist items restricted to owner"
+    },
+    "/history/{historyId}": {
+      "schema": "History",
+      "description": "Playback tracking restricted to owner"
+    },
+    "/adminLogs/{logId}": {
+      "schema": "AdminLog",
+      "description": "Immutable administrative audit trail"
+    }
+  }
+}
